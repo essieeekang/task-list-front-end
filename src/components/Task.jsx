@@ -6,8 +6,13 @@ const Task = ( props ) => {
   const buttonClass = props.isComplete ? 'tasks__item__toggle--completed' : '';
 
   const toggleClicked = () => {
-    props.toggleComplete(props.id);
+    if (props.isComplete) {
+      props.toggleIncomplete(props.id);
+    } else {
+      props.toggleComplete(props.id);
+    }
   };
+
   const removeClicked = () => {
     props.deleteTask(props.id);
   };
@@ -34,6 +39,7 @@ Task.propTypes = {
   title: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
   toggleComplete: PropTypes.func.isRequired,
+  toggleIncomplete: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
 };
 
