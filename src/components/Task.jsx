@@ -7,12 +7,11 @@ const Task = ( props ) => {
 
   const toggleClicked = () => {
     if (props.isComplete) {
-      props.toggleIncomplete(props.id);
+      return props.toggleIncomplete(props.id);
     } else {
-      props.toggleComplete(props.id);
+      return props.toggleComplete(props.id);
     }
   };
-
   const removeClicked = () => {
     props.deleteTask(props.id);
   };
