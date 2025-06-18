@@ -5,19 +5,6 @@ import axios from 'axios';
 
 const baseUrl = 'http://localhost:5000';
 
-// const TASKS = [
-//   {
-//     id: 1,
-//     title: 'Mow the lawn',
-//     isComplete: false,
-//   },
-//   {
-//     id: 2,
-//     title: 'Cook Pasta',
-//     isComplete: true,
-//   },
-// ];
-
 const getAllTasksApi = () => {
   return axios.get(`${baseUrl}/tasks`)
     .then( response => {
@@ -34,18 +21,8 @@ const convertFromApi = (apiTask) => {
   return newTask;
 };
 
-const toggleCompleteApi = (id) => {
-  return axios.patch(`${baseUrl}/tasks/${id}/mark_complete`)
-    .then(response => {
-      return convertFromApi(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-const toggleIncompleteApi = (id) => {
-  return axios.patch(`${baseUrl}/tasks/${id}/mark_incomplete`)
+const toggleCompleteApi = (id, endpoint) => {
+  return axios.patch(`${baseUrl}/tasks/${id}/${endpoint}`)
     .then(response => {
       return convertFromApi(response.data);
     })
@@ -73,21 +50,8 @@ const App = () => {
     getAllTasks();
   }, []);
 
-  const toggleComplete = id => {
-    return toggleCompleteApi(id)
-      .then(taskResult => {
-        setTaskData(taskData => taskData.map(task => {
-          if (task.id === taskResult.id) {
-            return taskResult;
-          } else {
-            return task;
-          }
-        }));
-      });
-  };
-
-  const toggleIncomplete = id => {
-    return toggleIncompleteApi(id)
+  const toggleComplete = (id, endpoint) => {
+    return toggleCompleteApi(id, endpoint)
       .then(taskResult => {
         setTaskData(taskData => taskData.map(task => {
           if (task.id === taskResult.id) {
@@ -118,7 +82,6 @@ const App = () => {
           <TaskList
             tasks={taskData}
             toggleComplete = {toggleComplete}
-            toggleIncomplete = {toggleIncomplete}
             deleteTask = {deleteTask}
           />
         </div>

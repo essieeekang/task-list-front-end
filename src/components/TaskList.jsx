@@ -11,7 +11,6 @@ const TaskList = ( props ) => {
         title={task.title}
         isComplete={task.isComplete}
         toggleComplete={props.toggleComplete}
-        toggleIncomplete={props.toggleIncomplete}
         deleteTask={props.deleteTask}
       />
     );
@@ -29,7 +28,6 @@ TaskList.propTypes = {
     })
   ).isRequired,
   toggleComplete: PropTypes.func.isRequired,
-  toggleIncomplete: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
 };
 
