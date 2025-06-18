@@ -20,7 +20,7 @@ const Task = ( props ) => {
         className={`tasks__item__toggle ${buttonClass}`}
         onClick={toggleClicked}
       >
-        {props.title}
+        {props.title} ({props.description})
       </button>
       <button
         className="tasks__item__remove button"
@@ -34,6 +34,7 @@ const Task = ( props ) => {
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
